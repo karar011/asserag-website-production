@@ -268,10 +268,30 @@
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123123!2d44.20!3d15.35!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1603db0000000000%3A0x0!2z2LXYp9mG2YXYp9ih!5e0!3m2!1sar!2sye!4v123456789" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </section>
 
-    <!-- WhatsApp -->
-    <a href="https://wa.me/967777777777" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- Smart WhatsApp Support -->
+    <div class="whatsapp-container">
+        <div class="whatsapp-menu" id="waMenu">
+            <div class="wa-header">
+                <i class="fab fa-whatsapp"></i>
+                <span class="lang-wa-header">تواصل مع السراج</span>
+            </div>
+            <a href="https://wa.me/967777777777?text=أرغب في الاستفسار عن المبيعات" target="_blank" class="wa-item">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="lang-wa-sales">قسم المبيعات</span>
+            </a>
+            <a href="https://wa.me/967777777777?text=أرغب في الدعم الفني" target="_blank" class="wa-item">
+                <i class="fas fa-tools"></i>
+                <span class="lang-wa-tech">الدعم الفني</span>
+            </a>
+            <a href="https://wa.me/967777777777?text=طلب صيانة طارئة" target="_blank" class="wa-item">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span class="lang-wa-maint">طلب صيانة طارئة</span>
+            </a>
+        </div>
+        <button class="whatsapp-float" id="waToggle">
+            <i class="fab fa-whatsapp"></i>
+        </button>
+    </div>
 
     <footer style="padding: 40px; text-align: center; border-top: 1px solid var(--card-border);">
         <p>© 2024 <span class="lang-footer">السراج للتجهيزات الصناعية. جميع الحقوق محفوظة.</span></p>

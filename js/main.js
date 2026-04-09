@@ -63,7 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
             contactDesc: 'We are here to answer your inquiries and meet your needs.',
             phone: 'Phone',
             email: 'Email',
-            location: 'Location'
+            location: 'Location',
+            waHeader: 'Contact Al-Seraj',
+            waSales: 'Sales Department',
+            waTech: 'Technical Support',
+            waMaint: 'Emergency Maintenance'
         },
         ar: {
             navLogo: 'السراج <span>للتجهيزات</span>',
@@ -102,7 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
             contactDesc: 'نحن هنا للإجابة على استفساراتكم وتلبية احتياجاتكم.',
             phone: 'الهاتف',
             email: 'البريد الإلكتروني',
-            location: 'الموقع'
+            location: 'الموقع',
+            waHeader: 'تواصل مع السراج',
+            waSales: 'قسم المبيعات',
+            waTech: 'الدعم الفني',
+            waMaint: 'صيانة طارئة'
         }
     };
 
@@ -156,7 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
             '.lang-dl-cert': t.dlCert,
             '.lang-dl-guide': t.dlGuide,
             '.lang-contact-title': t.contactTitle,
-            '.lang-contact-desc': t.contactDesc
+            '.lang-contact-desc': t.contactDesc,
+            '.lang-wa-header': t.waHeader,
+            '.lang-wa-sales': t.waSales,
+            '.lang-wa-tech': t.waTech,
+            '.lang-wa-maint': t.waMaint
         };
 
         for (const [selector, text] of Object.entries(selectors)) {
@@ -212,13 +224,48 @@ document.addEventListener('DOMContentLoaded', () => {
             : `📊 Estimated Needs: <br> - Detectors: ${detectors} <br> - Control Panel: ${panels}`;
     };
 
-    // Theme Toggle
+    // Theme Toggle & Auto Detection
     const themeToggle = document.getElementById('themeToggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    function setTheme(isDark) {
+        if (isDark) {
+            body.classList.remove('light');
+            body.classList.add('dark-forced');
+            if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        } else {
+            body.classList.add('light');
+            body.classList.remove('dark-forced');
+            if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+    }
+
+    // Initial Set
+    setTheme(prefersDark.matches);
+
+    // Listen for system changes
+    prefersDark.addEventListener('change', (e) => setTheme(e.matches));
+
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
-            body.classList.toggle('light');
-            themeToggle.innerHTML = body.classList.contains('light') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            const isNowLight = body.classList.toggle('light');
+            body.classList.toggle('dark-forced', !isNowLight);
+            themeToggle.innerHTML = isNowLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         });
+    }
+
+    // Smart WhatsApp Toggle
+    const waToggle = document.getElementById('waToggle');
+    const waMenu = document.getElementById('waMenu');
+    if (waToggle && waMenu) {
+        waToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            waMenu.style.display = waMenu.style.display === 'block' ? 'none' : 'block';
+        });
+        document.addEventListener('click', () => {
+            waMenu.style.display = 'none';
+        });
+        waMenu.addEventListener('click', (e) => e.stopPropagation());
     }
 
     // Contact Form Handler
@@ -251,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showFormMessage(true, currentLang === 'ar' ? 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.' : 'Your message has been sent successfully! We will contact you soon.');
         contactForm.reset();
         setTimeout(() => {
-            formMessage.style.display = 'none';
+            if (formMessage) formMessage.style.display = 'none';
         }, 5000);
     }
 
