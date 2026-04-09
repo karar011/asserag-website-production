@@ -44,7 +44,26 @@ document.addEventListener('DOMContentLoaded', () => {
             dlDesc: 'Download technical catalogs and international certifications.',
             footer: 'Al-Seraj Industrial Equipment. All Rights Reserved.',
             announcement: '📢 Special Offer: 15% discount on periodic maintenance for Asenware systems - Limited time!',
-            getStarted: 'Get Started'
+            getStarted: 'Get Started',
+            statProjects: 'Projects Done',
+            statYears: 'Years Experience',
+            statClients: 'Happy Clients',
+            servicesDesc: 'We provide integrated solutions in industrial security and safety.',
+            serviceFire: 'Fire Systems',
+            serviceFireDesc: 'Supply and installation of latest fire alarm and fighting systems.',
+            serviceMaint: 'Periodic Maintenance',
+            serviceMaintDesc: 'Professional maintenance contracts to ensure system efficiency.',
+            serviceTrain: 'Technical Training',
+            serviceTrainDesc: 'Training staff on using and maintaining safety systems.',
+            partners: 'Success Partners',
+            dlCat: 'Asenware Catalog 2024',
+            dlCert: 'LPCB International Certificate',
+            dlGuide: 'Installation & Maintenance Guide',
+            contactTitle: 'Contact Us',
+            contactDesc: 'We are here to answer your inquiries and meet your needs.',
+            phone: 'Phone',
+            email: 'Email',
+            location: 'Location'
         },
         ar: {
             navLogo: 'السراج <span>للتجهيزات</span>',
@@ -64,7 +83,26 @@ document.addEventListener('DOMContentLoaded', () => {
             dlDesc: 'حمل الكتالوجات الفنية وشهادات الاعتماد الدولية لمنتجاتنا.',
             footer: 'السراج للتجهيزات الصناعية. جميع الحقوق محفوظة.',
             announcement: '📢 عرض خاص: خصم 15% على عقود الصيانة الدورية لأنظمة Asenware - لفترة محدودة!',
-            getStarted: 'ابدأ الآن'
+            getStarted: 'ابدأ الآن',
+            statProjects: 'مشروع منفذ',
+            statYears: 'سنوات خبرة',
+            statClients: 'عميل سعيد',
+            servicesDesc: 'نقدم حلولاً متكاملة في مجال الأمن والسلامة الصناعية.',
+            serviceFire: 'أنظمة الحريق',
+            serviceFireDesc: 'توريد وتركيب أحدث أنظمة إنذار ومكافحة الحريق.',
+            serviceMaint: 'صيانة دورية',
+            serviceMaintDesc: 'عقود صيانة احترافية لضمان عمل الأنظمة بكفاءة.',
+            serviceTrain: 'تدريب فني',
+            serviceTrainDesc: 'تدريب الكوادر على استخدام وصيانة أنظمة السلامة.',
+            partners: 'شركاء النجاح',
+            dlCat: 'كتالوج Asenware 2024',
+            dlCert: 'شهادة LPCB الدولية',
+            dlGuide: 'دليل التركيب والصيانة',
+            contactTitle: 'اتصل بنا',
+            contactDesc: 'نحن هنا للإجابة على استفساراتكم وتلبية احتياجاتكم.',
+            phone: 'الهاتف',
+            email: 'البريد الإلكتروني',
+            location: 'الموقع'
         }
     };
 
@@ -102,12 +140,30 @@ document.addEventListener('DOMContentLoaded', () => {
             '.lang-dl-center': t.dlCenter,
             '.lang-dl-desc': t.dlDesc,
             '.lang-footer': t.footer,
-            '.lang-get-started': t.getStarted
+            '.lang-get-started': t.getStarted,
+            '.lang-stat-projects': t.statProjects,
+            '.lang-stat-years': t.statYears,
+            '.lang-stat-clients': t.statClients,
+            '.lang-services-desc': t.servicesDesc,
+            '.lang-service-fire': t.serviceFire,
+            '.lang-service-fire-desc': t.serviceFireDesc,
+            '.lang-service-maint': t.serviceMaint,
+            '.lang-service-maint-desc': t.serviceMaintDesc,
+            '.lang-service-train': t.serviceTrain,
+            '.lang-service-train-desc': t.serviceTrainDesc,
+            '.lang-partners': t.partners,
+            '.lang-dl-cat': t.dlCat,
+            '.lang-dl-cert': t.dlCert,
+            '.lang-dl-guide': t.dlGuide,
+            '.lang-contact-title': t.contactTitle,
+            '.lang-contact-desc': t.contactDesc
         };
 
         for (const [selector, text] of Object.entries(selectors)) {
-            const el = document.querySelector(selector);
-            if (el) el.innerText = text;
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(el => {
+                if (el) el.innerText = text;
+            });
         }
 
         const heroTitle = document.getElementById('heroTitle');
@@ -164,8 +220,6 @@ document.addEventListener('DOMContentLoaded', () => {
             themeToggle.innerHTML = body.classList.contains('light') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         });
     }
-});
-
 
     // Contact Form Handler
     const contactForm = document.getElementById('contactForm');
@@ -183,30 +237,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const message = document.getElementById('contactMessage').value.trim();
         const formMessage = document.getElementById('formMessage');
 
-        // Validation
         if (!name || !email || !message) {
             showFormMessage(false, currentLang === 'ar' ? 'يرجى ملء جميع الحقول المطلوبة' : 'Please fill all required fields');
             return;
         }
 
-        // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             showFormMessage(false, currentLang === 'ar' ? 'البريد الإلكتروني غير صحيح' : 'Invalid email address');
             return;
         }
 
-        // Simulate form submission
-        const formData = { name, email, phone, message };
-        console.log('Form Data:', formData);
-
-        // Show success message
         showFormMessage(true, currentLang === 'ar' ? 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.' : 'Your message has been sent successfully! We will contact you soon.');
-
-        // Reset form
         contactForm.reset();
-
-        // Hide message after 5 seconds
         setTimeout(() => {
             formMessage.style.display = 'none';
         }, 5000);
@@ -214,41 +257,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showFormMessage(isSuccess, message) {
         const formMessage = document.getElementById('formMessage');
-        formMessage.style.display = 'block';
-        formMessage.className = 'form-message ' + (isSuccess ? 'success' : 'error');
-        formMessage.textContent = message;
-    }
-
-    // Update translations to include new sections
-    const originalUpdateTranslations = window.updateTranslations;
-    window.updateTranslations = function() {
-        if (originalUpdateTranslations) originalUpdateTranslations();
-        
-        const t = translations[currentLang];
-        
-        // Add new translations
-        if (currentLang === 'ar') {
-            const newTranslations = {
-                portfolio: 'معرض المشاريع',
-                portfolioDesc: 'مشاريع ناجحة نفذتها السراج في مختلف المنشآت الحكومية والخاصة.',
-                contactTitle: 'اتصل بنا',
-                contactDesc: 'نحن هنا للإجابة على استفساراتكم وتلبية احتياجاتكم.',
-                phone: 'الهاتف',
-                email: 'البريد الإلكتروني',
-                location: 'الموقع'
-            };
-            Object.assign(t, newTranslations);
-        } else {
-            const newTranslations = {
-                portfolio: 'Portfolio',
-                portfolioDesc: 'Successful projects implemented by Al-Seraj in various government and private facilities.',
-                contactTitle: 'Contact Us',
-                contactDesc: 'We are here to answer your inquiries and meet your needs.',
-                phone: 'Phone',
-                email: 'Email',
-                location: 'Location'
-            };
-            Object.assign(t, newTranslations);
+        if (formMessage) {
+            formMessage.style.display = 'block';
+            formMessage.className = 'form-message ' + (isSuccess ? 'success' : 'error');
+            formMessage.textContent = message;
         }
-    };
+    }
 });
